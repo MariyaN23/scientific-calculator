@@ -21,7 +21,10 @@
         <div class="circle"></div>
         <div class="circle"></div>
         <div class="circle"></div>
-        <div class="output-text"></div>
+        <div class="output-text">
+          <div class="previous-operand" data-previous-operand></div>
+          <div class="current-operand" data-current-operand></div>
+        </div>
       </div>
       <button class="math-operations">(</button>
       <button class="math-operations">)</button>
@@ -29,49 +32,49 @@
       <button class="math-operations">m+</button>
       <button class="math-operations">m-</button>
       <button class="math-operations">mr</button>
-      <button class="math-operations">AC</button>
+      <button class="math-operations" data-all-clear>AC</button>
       <button class="math-operations">+/-</button>
       <button class="math-operations">%</button>
-      <button class="math-symbols">÷</button>
+      <button class="math-symbols" data-operation>÷</button>
       <button class="math-operations">2<sup>nd</sup></button>
       <button class="math-operations">x<sup>2</sup></button>
       <button class="math-operations">x<sup>3</sup></button>
       <button class="math-operations">x<sup>y</sup></button>
       <button class="math-operations">e<sup>x</sup></button>
       <button class="math-operations">10<sup>x</sup></button>
-      <button>7</button>
-      <button>8</button>
-      <button>9</button>
-      <button class="math-symbols">×</button>
+      <button data-number>7</button>
+      <button data-number>8</button>
+      <button data-number>9</button>
+      <button class="math-symbols" data-operation>×</button>
       <button class="math-operations">1/x</button>
       <button class="math-operations"><sup>2</sup>&radic;x</button>
       <button class="math-operations"><sup>3</sup>&radic;x</button>
       <button class="math-operations"><sup>y</sup>&radic;x</button>
       <button class="math-operations">ln</button>
       <button class="math-operations">log<sub>10</sub></button>
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
-      <button class="math-symbols">-</button>
+      <button data-number>4</button>
+      <button data-number>5</button>
+      <button data-number>6</button>
+      <button class="math-symbols" data-operation>-</button>
       <button class="math-operations">x!</button>
       <button class="math-operations">sin</button>
       <button class="math-operations">cos</button>
       <button class="math-operations">tan</button>
       <button class="math-operations">e</button>
       <button class="math-operations">EE</button>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button class="math-symbols">+</button>
+      <button data-number>1</button>
+      <button data-number>2</button>
+      <button data-number>3</button>
+      <button class="math-symbols" data-operation>+</button>
       <button class="math-operations">Rad</button>
       <button class="math-operations">sinh</button>
       <button class="math-operations">cosh</button>
       <button class="math-operations">tanh</button>
       <button class="math-operations">&pi;</button>
       <button class="math-operations">Rand</button>
-      <button class="zero-btn">0</button>
-      <button>,</button>
-      <button class="math-symbols">=</button>
+      <button class="zero-btn" data-number>0</button>
+      <button data-number>,</button>
+      <button class="math-symbols" data-equals>=</button>
     </div>
   </div>
 </div>
