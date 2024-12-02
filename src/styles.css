@@ -1,0 +1,124 @@
+:root {
+    --text: #fff;
+    --text-theme: #000;
+    --wrapper-outline: #000;
+    --wrapper-border: #969696;
+    --wrapper-box-shadow: #0000004C;
+    --output-container: #535353;
+    --button: #7d7d7d;
+    --math-symbol-button: #ff9f0a;
+    --math-operation-button: #646464;
+    --input-radio: #ff9f0a;
+
+    --first-circle: #ff5f57;
+    --second-circle: #febc2e;
+    --third-circle: #28c840;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.calculator-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+    gap: 5rem;
+}
+
+.calculator-wrapper {
+    overflow: hidden;
+    outline: 1px solid var(--wrapper-outline);
+    border: 3px solid var(--wrapper-border);
+    border-radius: 20px;
+    box-shadow: -1px 16px 20px 6px var(--wrapper-box-shadow);
+}
+
+.calculator-grid {
+    display: grid;
+    max-width: 100%;
+    grid-template-columns: repeat(10, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+    border-radius: 15px;
+}
+
+.output-container {
+    grid-column: span 10;
+    background-color: var(--output-container);
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right: 20px;
+    position: relative;
+}
+
+.output-text {
+    font-size: 5rem;
+    color: var(--text);
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: absolute;
+}
+
+.circle:nth-child(1) {
+    background-color: var(--first-circle);
+    top: 10%;
+    left: 2%;
+}
+
+.circle:nth-child(2) {
+    background-color: var(--second-circle);
+    top: 10%;
+    left: 5%;
+}
+
+.circle:nth-child(3) {
+    background-color: var(--third-circle);
+    top: 10%;
+    left: 8%;
+}
+
+button {
+    cursor: pointer;
+    border: 1px solid var(--output-container);
+    background-color: var(--button);
+    color: var(--text);
+    font-size: 2rem;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:last-child {
+    border-radius: 0 0 15px 0;
+}
+
+button:disabled {
+    opacity: 0.6;
+}
+
+.zero-btn {
+    grid-column: span 2;
+}
+
+.math-symbols {
+    background-color: var(--math-symbol-button);
+}
+
+.math-operations {
+    background-color: var(--math-operation-button);
+}
