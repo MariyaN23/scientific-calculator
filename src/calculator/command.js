@@ -56,3 +56,15 @@ export class OperateCommand extends Command {
     this.calculator.updateDisplay()
   }
 }
+
+export class MemoryCommand extends Command {
+  constructor(calculator, operation) {
+    super(calculator)
+    this.operation = operation
+  }
+
+  execute() {
+    this.calculator.memory(this.operation)
+    this.calculator.updateDisplay()
+  }
+}

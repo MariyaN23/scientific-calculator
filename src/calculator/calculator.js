@@ -3,6 +3,7 @@ export class Calculator {
     this.previousOperandTextElement = previousOperandTextElement
     this.currentOperandTextElement = currentOperandTextElement
     this.clear()
+    this.memoryValue = null
   }
 
   clear() {
@@ -156,5 +157,26 @@ export class Calculator {
     this.currentOperand = Number.isInteger(result)
       ? result.toString().replace('.', ',')
       : result.toFixed(15).toString().replace(/0+$/, '').replace(/\./, ',').replace(/,+$/, ',0')
+  }
+
+  memory(memoryOperation) {
+    const current = parseFloat(this.currentOperand.replace(',', '.'))
+    switch (memoryOperation) {
+      case 'mc':
+        this.memoryValue = null
+        break
+      case 'm+':
+        this.memoryValue += current
+        break
+      case 'm-':
+        this.memoryValue -= current
+        break
+      case 'mr':
+        if (!this.memoryValue) return
+        this.currentOperand = this.memoryValue.toString().replace('.', ',')
+        break
+      default:
+        return
+    }
   }
 }

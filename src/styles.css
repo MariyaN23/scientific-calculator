@@ -120,6 +120,8 @@ button:last-child {
 
 button:disabled {
     opacity: 0.6;
+    color: var(--button);
+    cursor: not-allowed;
 }
 
 .zero-btn {
