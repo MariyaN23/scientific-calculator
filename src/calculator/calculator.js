@@ -1,3 +1,6 @@
+import { MemoryCommand } from './command.js'
+import { memoryButtons } from '../index.js'
+
 export class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
     this.previousOperandTextElement = previousOperandTextElement
@@ -89,6 +92,12 @@ export class Calculator {
       this.previousOperandTextElement.innerText = this.previousOperand
     }
   }
+  disableMButtons() {
+    memoryButtons.forEach(button => {
+      button.textContent === 'mc' || button.textContent === 'mr'
+        ? button.disabled = !button.disabled : ''
+    })
+  }
 
   operate(operation) {
     const current = parseFloat(this.currentOperand.replace(',', '.'))
@@ -164,15 +173,22 @@ export class Calculator {
     switch (memoryOperation) {
       case 'mc':
         this.memoryValue = null
+        this.disableMButtons()
         break
       case 'm+':
+        if (!this.memoryValue) {
+          this.disableMButtons()
+        }
         this.memoryValue += current
         break
       case 'm-':
+        if (!this.memoryValue) {
+          this.disableMButtons()
+        }
         this.memoryValue -= current
         break
       case 'mr':
-        if (!this.memoryValue) return
+        if (this.memoryValue === null) return
         this.currentOperand = this.memoryValue.toString().replace('.', ',')
         break
       default:
