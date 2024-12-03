@@ -44,3 +44,15 @@ export class ClearCommand extends Command {
     this.calculator.updateDisplay()
   }
 }
+
+export class OperateCommand extends Command {
+  constructor(calculator, operation) {
+    super(calculator)
+    this.operation = operation
+  }
+
+  execute() {
+    this.calculator.operate(this.operation)
+    this.calculator.updateDisplay()
+  }
+}

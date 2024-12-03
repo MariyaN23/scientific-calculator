@@ -1,9 +1,16 @@
 import './styles.css'
 import { Calculator } from './calculator/calculator.js'
-import { AddNumberCommand, CalculateCommand, ChooseOperationCommand, ClearCommand } from './calculator/command.js'
+import {
+  AddNumberCommand,
+  CalculateCommand,
+  ChooseOperationCommand,
+  ClearCommand,
+  OperateCommand,
+} from './calculator/command.js'
 
 const numberButtons = document.querySelectorAll('[data-number]')
 const operationButtons = document.querySelectorAll('[data-operation]')
+const operateButtons = document.querySelectorAll('[data-operate]')
 const equalsButton = document.querySelector('[data-equals]')
 const allClearButton = document.querySelector('[data-all-clear]')
 const previousOperandValue = document.querySelector('[data-previous-operand]')
@@ -33,4 +40,11 @@ equalsButton.addEventListener('click', () => {
 allClearButton.addEventListener('click', () => {
   const command = new ClearCommand(calculator)
   command.execute()
+})
+
+operateButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const command = new OperateCommand(calculator, button.innerText)
+    command.execute()
+  })
 })
