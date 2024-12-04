@@ -1,5 +1,4 @@
-import { MemoryCommand } from './command.js'
-import { memoryButtons } from '../index.js'
+import { allButtons, memoryButtons } from '../index.js'
 
 export class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
@@ -55,6 +54,7 @@ export class Calculator {
       case '÷':
         if (current === 0) {
           this.currentOperand = 'Division by zero is impossible'
+          this.disableButtons(true)
           return
         } else {
           result = prev / current
@@ -116,6 +116,7 @@ export class Calculator {
       case '1/x':
         if (current === 0) {
           this.currentOperand = 'Division by zero is impossible'
+          this.disableButtons(true)
           return
         } else {
           result = 1 / current
@@ -146,6 +147,7 @@ export class Calculator {
       case 'x!':
         if (current < 0) {
           this.currentOperand = 'Invalid input'
+          this.disableButtons(true)
           return
         } else {
           result = 1
@@ -160,6 +162,14 @@ export class Calculator {
     this.currentOperand = Number.isInteger(result)
       ? result.toString().replace('.', ',')
       : result.toFixed(15).toString().replace(/0+$/, '').replace(/\./, ',').replace(/,+$/, ',0')
+  }
+
+  disableButtons(disable) {
+    allButtons.forEach(button => {
+      if (button.textContent !== 'AC' && button.textContent !== 'mc' && button.textContent !== 'mr') {
+        button.disabled = disable
+      }
+    })
   }
 
   memory(memoryOperation) {

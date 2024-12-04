@@ -16,6 +16,7 @@ const allClearButton = document.querySelector('[data-all-clear]')
 const previousOperandValue = document.querySelector('[data-previous-operand]')
 const currentOperandValue = document.querySelector('[data-current-operand]')
 export const memoryButtons = document.querySelectorAll('[data-memory]')
+export const allButtons = document.querySelectorAll('button')
 
 const calculator = new Calculator(previousOperandValue, currentOperandValue)
 
@@ -41,6 +42,11 @@ equalsButton.addEventListener('click', () => {
 allClearButton.addEventListener('click', () => {
   const command = new ClearCommand(calculator)
   command.execute()
+  allButtons.forEach(button => {
+    if (button.textContent !== 'AC' && button.textContent !== 'mc' && button.textContent !== 'mr') {
+      button.disabled = false
+    }
+  })
 })
 
 operateButtons.forEach(button => {

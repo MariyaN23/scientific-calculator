@@ -6,6 +6,7 @@
     --wrapper-box-shadow: #0000004C;
     --output-container: #535353;
     --button: #7d7d7d;
+    --button-disabled: #989898;
     --math-symbol-button: #ff9f0a;
     --math-operation-button: #646464;
     --input-radio: #ff9f0a;
@@ -120,7 +121,7 @@ button:last-child {
 
 button:disabled {
     opacity: 0.6;
-    color: var(--button);
+    color: var(--button-disabled);
     cursor: not-allowed;
 }
 
