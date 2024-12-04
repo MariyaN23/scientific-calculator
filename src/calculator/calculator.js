@@ -1,4 +1,5 @@
-import { allButtons, memoryButtons } from '../index.js'
+const memoryButtons = document.querySelectorAll('[data-memory]')
+const allButtons = document.querySelectorAll('button')
 
 export class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
@@ -26,11 +27,7 @@ export class Calculator {
       this.calculate()
     }
     let displayed
-    operation === 'ʸ√x'
-      ? displayed = '√'
-      : operation === 'xʸ'
-        ? displayed = '^'
-        : displayed = operation
+    operation === 'ʸ√x' ? (displayed = '√') : operation === 'xʸ' ? (displayed = '^') : (displayed = operation)
     this.operation = displayed
     this.previousOperand = this.currentOperand
     this.currentOperand = ''
@@ -63,7 +60,7 @@ export class Calculator {
       case '√':
         let root = current / prev
         for (let i = 0; i < 10; i++) {
-          root = ((prev - 1) * root + current / (root ** (prev - 1))) / prev
+          root = ((prev - 1) * root + current / root ** (prev - 1)) / prev
         }
         result = root
         break
@@ -165,7 +162,7 @@ export class Calculator {
   }
 
   disableButtons(disable) {
-    allButtons.forEach(button => {
+    allButtons.forEach((button) => {
       if (button.textContent !== 'AC' && button.textContent !== 'mc' && button.textContent !== 'mr') {
         button.disabled = disable
       }
@@ -204,7 +201,7 @@ export class Calculator {
   }
 
   disableMemoryButtons(disable) {
-    memoryButtons.forEach(button => {
+    memoryButtons.forEach((button) => {
       if (button.textContent === 'mc' || button.textContent === 'mr') {
         button.disabled = disable
       }

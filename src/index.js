@@ -4,7 +4,8 @@ import {
   AddNumberCommand,
   CalculateCommand,
   ChooseOperationCommand,
-  ClearCommand, MemoryCommand,
+  ClearCommand,
+  MemoryCommand,
   OperateCommand,
 } from './calculator/command.js'
 
@@ -15,19 +16,19 @@ const equalsButton = document.querySelector('[data-equals]')
 const allClearButton = document.querySelector('[data-all-clear]')
 const previousOperandValue = document.querySelector('[data-previous-operand]')
 const currentOperandValue = document.querySelector('[data-current-operand]')
-export const memoryButtons = document.querySelectorAll('[data-memory]')
-export const allButtons = document.querySelectorAll('button')
+const memoryButtons = document.querySelectorAll('[data-memory]')
+const allButtons = document.querySelectorAll('button')
 
 const calculator = new Calculator(previousOperandValue, currentOperandValue)
 
-numberButtons.forEach(button => {
+numberButtons.forEach((button) => {
   button.addEventListener('click', () => {
     const command = new AddNumberCommand(calculator, button.innerText)
     command.execute()
   })
 })
 
-operationButtons.forEach(button => {
+operationButtons.forEach((button) => {
   button.addEventListener('click', () => {
     const command = new ChooseOperationCommand(calculator, button.innerText)
     command.execute()
