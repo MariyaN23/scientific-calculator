@@ -92,12 +92,6 @@ export class Calculator {
       this.previousOperandTextElement.innerText = this.previousOperand
     }
   }
-  disableMButtons() {
-    memoryButtons.forEach(button => {
-      button.textContent === 'mc' || button.textContent === 'mr'
-        ? button.disabled = !button.disabled : ''
-    })
-  }
 
   operate(operation) {
     const current = parseFloat(this.currentOperand.replace(',', '.'))
@@ -173,26 +167,37 @@ export class Calculator {
     switch (memoryOperation) {
       case 'mc':
         this.memoryValue = null
-        this.disableMButtons()
+        this.disableMemoryButtons(true)
         break
       case 'm+':
         if (!this.memoryValue) {
-          this.disableMButtons()
+          this.disableMemoryButtons(true)
         }
         this.memoryValue += current
+        this.disableMemoryButtons(false)
         break
       case 'm-':
         if (!this.memoryValue) {
-          this.disableMButtons()
+          this.disableMemoryButtons(true)
         }
         this.memoryValue -= current
+        this.disableMemoryButtons(false)
         break
       case 'mr':
         if (this.memoryValue === null) return
         this.currentOperand = this.memoryValue.toString().replace('.', ',')
+        this.disableMemoryButtons(false)
         break
       default:
         return
     }
+  }
+
+  disableMemoryButtons(disable) {
+    memoryButtons.forEach(button => {
+      if (button.textContent === 'mc' || button.textContent === 'mr') {
+        button.disabled = disable
+      }
+    })
   }
 }
