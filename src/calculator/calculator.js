@@ -212,12 +212,18 @@ export class Calculator {
         if (this.memoryValue === null) {
           this.disableMemoryButtons(true)
         }
+        if (isNaN(current)) {
+          return
+        }
         this.memoryValue += current
         this.disableMemoryButtons(false)
         break
       case 'm-':
         if (this.memoryValue === null) {
           this.disableMemoryButtons(true)
+        }
+        if (isNaN(current)) {
+          return
         }
         this.memoryValue -= current
         this.disableMemoryButtons(false)
