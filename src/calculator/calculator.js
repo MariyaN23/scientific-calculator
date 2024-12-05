@@ -58,18 +58,42 @@ export class Calculator {
         }
         break
       case '√':
-        let root = current / prev
-        for (let i = 0; i < 10; i++) {
-          root = ((prev - 1) * root + current / root ** (prev - 1)) / prev
+        if (prev <= 0) {
+          this.currentOperand = 'Invalid input'
+          this.disableButtons(true)
+          return
+        } else {
+          let root = current / prev
+          for (let i = 0; i < current; i++) {
+            root = ((prev - 1) * root + current / root ** (prev - 1)) / prev
+          }
+          result = root
         }
-        result = root
         break
       case '^':
-        let square = 1
-        for (let i = 0; i < current; i++) {
-          square *= prev
+        if (current === 0) {
+          result = 1
         }
-        result = square
+        if (current === 0 && prev === 0) {
+          this.currentOperand = 'Invalid input'
+          this.disableButtons(true)
+          return
+        }
+        let power = 1
+        let absExponent
+        if (current > 0) {
+          absExponent = current
+        } else if (current < 0) {
+          absExponent = current * -1
+        }
+        for (let i = 0; i < absExponent; i++) {
+          power *= prev
+        }
+        if (current < 0) {
+          result = 1 / power
+        } else if (current > 0) {
+          result = power
+        }
         break
       default:
         return
@@ -120,7 +144,11 @@ export class Calculator {
         }
         break
       case '√x':
-        if (current === 0) {
+        if (current < 0) {
+          this.currentOperand = 'Invalid input'
+          this.disableButtons(true)
+          return
+        } else if (current === 0) {
           result = 0
         } else {
           let squareRoot = current / 2
@@ -131,7 +159,11 @@ export class Calculator {
         }
         break
       case '∛x':
-        if (current === 0) {
+        if (current < 0) {
+          this.currentOperand = 'Invalid input'
+          this.disableButtons(true)
+          return
+        } else if (current === 0) {
           result = 0
         } else {
           let cubeRoot = current / 3
