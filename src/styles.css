@@ -137,6 +137,10 @@ button:disabled {
     background-color: var(--math-operation-button);
 }
 
+.math-operations:not([data-operation]):not([data-operate]):not([data-all-clear]):not([data-memory]) {
+    cursor: not-allowed;
+}
+
 .change-theme {
     margin-left: 20px;
 }
