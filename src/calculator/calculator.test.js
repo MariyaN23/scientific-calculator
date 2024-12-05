@@ -148,4 +148,35 @@ describe('Calculator Tests', () => {
       expect(calculator.currentOperand).toBe('Invalid input')
     })
   })
+
+  describe('Memory method', () => {
+     test('should correctly clear memory', () => {
+       calculator.memoryValue = 5
+       calculator.memory('mc')
+       expect(calculator.memoryValue).toBe(null)
+     })
+
+     test('should be correct adding to memory', () => {
+       calculator.currentOperand = '5'
+       calculator.memory('m+')
+       expect(calculator.memoryValue).toBe(5)
+       calculator.memory('m+')
+       expect(calculator.memoryValue).toBe(10)
+     })
+
+     test('should be correct subtraction from memory', () => {
+       calculator.currentOperand = '5'
+       calculator.memory('m-')
+       expect(calculator.memoryValue).toBe(-5)
+       calculator.currentOperand = '5'
+       calculator.memory('m-')
+       expect(calculator.memoryValue).toBe(-10)
+     })
+
+     test('should be correct recall from memory', () => {
+       calculator.memoryValue = 5
+       calculator.memory('mr')
+       expect(calculator.currentOperand).toBe('5')
+     })
+   })
 })

@@ -209,14 +209,14 @@ export class Calculator {
         this.disableMemoryButtons(true)
         break
       case 'm+':
-        if (!this.memoryValue) {
+        if (this.memoryValue === null) {
           this.disableMemoryButtons(true)
         }
         this.memoryValue += current
         this.disableMemoryButtons(false)
         break
       case 'm-':
-        if (!this.memoryValue) {
+        if (this.memoryValue === null) {
           this.disableMemoryButtons(true)
         }
         this.memoryValue -= current
