@@ -66,6 +66,7 @@ memoryButtons.forEach((button) => {
     const command = new MemoryCommand(calculator, button.innerText)
     command.execute()
   })
+
   if (!calculator.memoryValue) {
     button.textContent === Memory.Clear || button.textContent === Memory.Recall ? (button.disabled = true) : ''
   }
