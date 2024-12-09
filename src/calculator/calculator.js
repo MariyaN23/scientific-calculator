@@ -1,6 +1,32 @@
 const memoryButtons = document.querySelectorAll('[data-memory]')
 const allButtons = document.querySelectorAll('button')
 
+export const Operations = {
+  Plus: '+',
+  Minus: '-',
+  Multiply: '×',
+  Divide: '÷',
+  Root: '√',
+  Power: '^',
+  Percent: '%',
+  SignChange: '±',
+  Square: 'x²',
+  Cube: 'x³',
+  TenPower: '10ˣ',
+  Reciprocal: '1/x',
+  SquareRoot: '√x',
+  CubeRoot: '∛x',
+  Factorial: 'x!',
+  AllClear: 'AC',
+}
+
+export const Memory = {
+  Clear: 'mc',
+  Add: 'm+',
+  Subtraction: 'm-',
+  Recall: 'mr',
+}
+
 export class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
     this.previousOperandTextElement = previousOperandTextElement
@@ -27,7 +53,11 @@ export class Calculator {
       this.calculate()
     }
     let displayed
-    operation === 'ʸ√x' ? (displayed = '√') : operation === 'xʸ' ? (displayed = '^') : (displayed = operation)
+    operation === 'ʸ√x'
+      ? (displayed = Operations.Root)
+      : operation === 'xʸ'
+        ? (displayed = Operations.Power)
+        : (displayed = operation)
     this.operation = displayed
     this.previousOperand = this.currentOperand
     this.currentOperand = ''
@@ -39,16 +69,16 @@ export class Calculator {
     const current = parseFloat(this.currentOperand.replace(',', '.'))
     if (isNaN(prev) || isNaN(current)) return
     switch (this.operation) {
-      case '+':
+      case Operations.Plus:
         result = prev + current
         break
-      case '-':
+      case Operations.Minus:
         result = prev - current
         break
-      case '×':
+      case Operations.Multiply:
         result = prev * current
         break
-      case '÷':
+      case Operations.Divide:
         if (current === 0) {
           this.currentOperand = 'Division by zero is impossible'
           this.disableButtons(true)
@@ -57,7 +87,7 @@ export class Calculator {
           result = prev / current
         }
         break
-      case '√':
+      case Operations.Root:
         if (prev <= 0) {
           this.currentOperand = 'Invalid input'
           this.disableButtons(true)
@@ -70,7 +100,7 @@ export class Calculator {
           result = root
         }
         break
-      case '^':
+      case Operations.Power:
         if (current === 0) {
           result = 1
         }
@@ -119,22 +149,22 @@ export class Calculator {
     if (isNaN(current)) return
     let result
     switch (operation) {
-      case '%':
+      case Operations.Percent:
         result = current / 100
         break
-      case '±':
+      case Operations.SignChange:
         result = -current
         break
-      case 'x²':
+      case Operations.Square:
         result = current ** 2
         break
-      case 'x³':
+      case Operations.Cube:
         result = current ** 3
         break
-      case '10ˣ':
+      case Operations.TenPower:
         result = 10 ** current
         break
-      case '1/x':
+      case Operations.Reciprocal:
         if (current === 0) {
           this.currentOperand = 'Division by zero is impossible'
           this.disableButtons(true)
@@ -143,7 +173,7 @@ export class Calculator {
           result = 1 / current
         }
         break
-      case '√x':
+      case Operations.SquareRoot:
         if (current < 0) {
           this.currentOperand = 'Invalid input'
           this.disableButtons(true)
@@ -158,7 +188,7 @@ export class Calculator {
           result = squareRoot
         }
         break
-      case '∛x':
+      case Operations.CubeRoot:
         if (current < 0) {
           this.currentOperand = 'Invalid input'
           this.disableButtons(true)
@@ -173,7 +203,7 @@ export class Calculator {
           result = cubeRoot
         }
         break
-      case 'x!':
+      case Operations.Factorial:
         if (current < 0) {
           this.currentOperand = 'Invalid input'
           this.disableButtons(true)
@@ -195,7 +225,11 @@ export class Calculator {
 
   disableButtons(disable) {
     allButtons.forEach((button) => {
-      if (button.textContent !== 'AC' && button.textContent !== 'mc' && button.textContent !== 'mr') {
+      if (
+        button.textContent !== Operations.AllClear &&
+        button.textContent !== Memory.Clear &&
+        button.textContent !== Memory.Recall
+      ) {
         button.disabled = disable
       }
     })
@@ -204,11 +238,11 @@ export class Calculator {
   memory(memoryOperation) {
     const current = parseFloat(this.currentOperand.replace(',', '.'))
     switch (memoryOperation) {
-      case 'mc':
+      case Memory.Clear:
         this.memoryValue = null
         this.disableMemoryButtons(true)
         break
-      case 'm+':
+      case Memory.Add:
         if (this.memoryValue === null) {
           this.disableMemoryButtons(true)
         }
@@ -218,7 +252,7 @@ export class Calculator {
         this.memoryValue += current
         this.disableMemoryButtons(false)
         break
-      case 'm-':
+      case Memory.Subtraction:
         if (this.memoryValue === null) {
           this.disableMemoryButtons(true)
         }
@@ -228,7 +262,7 @@ export class Calculator {
         this.memoryValue -= current
         this.disableMemoryButtons(false)
         break
-      case 'mr':
+      case Memory.Recall:
         if (this.memoryValue === null) return
         this.currentOperand = this.memoryValue.toString().replace('.', ',')
         this.disableMemoryButtons(false)
@@ -240,7 +274,7 @@ export class Calculator {
 
   disableMemoryButtons(disable) {
     memoryButtons.forEach((button) => {
-      if (button.textContent === 'mc' || button.textContent === 'mr') {
+      if (button.textContent === Memory.Clear || button.textContent === Memory.Recall) {
         button.disabled = disable
       }
     })

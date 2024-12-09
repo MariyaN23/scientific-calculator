@@ -1,5 +1,5 @@
 import './styles.css'
-import { Calculator } from './calculator/calculator.js'
+import { Calculator, Memory, Operations } from './calculator/calculator.js'
 import {
   AddNumberCommand,
   CalculateCommand,
@@ -43,27 +43,30 @@ equalsButton.addEventListener('click', () => {
 allClearButton.addEventListener('click', () => {
   const command = new ClearCommand(calculator)
   command.execute()
-  allButtons.forEach(button => {
-    if (button.textContent !== 'AC' && button.textContent !== 'mc' && button.textContent !== 'mr') {
+  allButtons.forEach((button) => {
+    if (
+      button.textContent !== Operations.AllClear &&
+      button.textContent !== Memory.Clear &&
+      button.textContent !== Memory.Recall
+    ) {
       button.disabled = false
     }
   })
 })
 
-operateButtons.forEach(button => {
+operateButtons.forEach((button) => {
   button.addEventListener('click', () => {
     const command = new OperateCommand(calculator, button.innerText)
     command.execute()
   })
 })
 
-memoryButtons.forEach(button => {
+memoryButtons.forEach((button) => {
   button.addEventListener('click', () => {
     const command = new MemoryCommand(calculator, button.innerText)
     command.execute()
   })
   if (!calculator.memoryValue) {
-    button.textContent === 'mc' || button.textContent === 'mr'
-      ? button.disabled = true : ''
+    button.textContent === Memory.Clear || button.textContent === Memory.Recall ? (button.disabled = true) : ''
   }
 })

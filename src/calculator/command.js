@@ -3,8 +3,7 @@ class Command {
     this.calculator = calculator
   }
 
-  execute() {
-  }
+  execute() {}
 }
 
 export class AddNumberCommand extends Command {

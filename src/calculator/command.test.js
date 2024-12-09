@@ -1,4 +1,4 @@
-import { Calculator } from './calculator.js'
+import { Calculator, Memory, Operations } from './calculator.js'
 import {
   AddNumberCommand,
   ChooseOperationCommand,
@@ -34,16 +34,16 @@ describe('Command Tests', () => {
 
   test('ChooseOperationCommand should choose an operation', () => {
     calculator.addNumber('5')
-    const command = new ChooseOperationCommand(calculator, '+')
+    const command = new ChooseOperationCommand(calculator, Operations.Plus)
     command.execute()
-    expect(calculator.operation).toBe('+')
+    expect(calculator.operation).toBe(Operations.Plus)
     expect(calculator.previousOperand).toBe('5')
     expect(calculator.currentOperand).toBe('')
   })
 
   test('CalculateCommand should calculate result correctly', () => {
     calculator.addNumber('2')
-    calculator.chooseOperation('+')
+    calculator.chooseOperation(Operations.Plus)
     calculator.addNumber('3')
     const command = new CalculateCommand(calculator)
     command.execute()
@@ -52,16 +52,16 @@ describe('Command Tests', () => {
 
   test('OperateCommand should do correct operation on the current operand', () => {
     calculator.addNumber('1')
-    const command = new OperateCommand(calculator, '%')
+    const command = new OperateCommand(calculator, Operations.Percent)
     command.execute()
     expect(calculator.currentOperand).toBe('0,01')
   })
 
   test('MemoryCommand should do correct operations in memory', () => {
     calculator.addNumber('5')
-    const command = new MemoryCommand(calculator, 'm+')
+    const command = new MemoryCommand(calculator, Memory.Add)
     command.execute()
-    const command2 = new MemoryCommand(calculator, 'mr')
+    const command2 = new MemoryCommand(calculator, Memory.Recall)
     command2.execute()
     expect(calculator.currentOperand).toBe('5')
   })
